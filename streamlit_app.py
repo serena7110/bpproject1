@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 # df = pd.read_csv('data/ACE_stat.csv', encoding='utf-8')
 csv_data = st.secrets["project"]["data1"]
 df = pd.read_csv(io.StringIO(csv_data), encoding = 'utf-8')
-st.dataframe(df)
+# st.dataframe(df)
 
 X = df.iloc[:, :-1].values
 y = df.iloc[:, -1].astype(int).values
