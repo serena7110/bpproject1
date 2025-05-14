@@ -3,6 +3,7 @@ import pandas as pd
 import io
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 # df = pd.read_csv('data/ACE_stat.csv', encoding='utf-8')
 csv_data = st.secrets["project"]["data1"]
@@ -21,7 +22,6 @@ X_test = scaler.transform(X_test)
 knn = KNeighborsClassifier(n_neighbors=15)
 knn.fit(X_train, y_train)
 
-y_pred = knn.predict(X_test)
 
 st.write ("## 당신의 운동 유형은?")
 
@@ -37,7 +37,6 @@ long = st.selectbox("선택해주세요", ["1","2","3","4","5"],key="q3")
 st.write ("#### Q4 PAPS 50m 달리기 등급")
 short = st.selectbox("선택해주세요", ["1","2","3","4","5"],key="q4")
 
-
 if st.button('예측하기'):
     try: 
         exc_value = float(exc)
@@ -49,7 +48,9 @@ if st.button('예측하기'):
         user_input_scaled = scaler.transform(user_input)
 
         prediction = knn.predict(user_input_scaled)
+        st.write(f"prediction: {prediction}")
         prediction_proba = knn.predict_proba(user_input_scaled)[0]
+        st.write(f"prediction_proba: {prediction_proba}")
         genotype_labels = {0: "DD", 1: "ID", 2: "II"}
         selected_genotype = genotype_labels[prediction[0]]
 
