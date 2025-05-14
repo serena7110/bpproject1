@@ -48,9 +48,7 @@ if st.button('예측하기'):
         user_input_scaled = scaler.transform(user_input)
 
         prediction = knn.predict(user_input_scaled)
-        st.write(f"prediction: {prediction}")
         prediction_proba = knn.predict_proba(user_input_scaled)[0]
-        st.write(f"prediction_proba: {prediction_proba}")
         genotype_labels = {0: "DD", 1: "ID", 2: "II"}
         selected_genotype = genotype_labels[prediction[0]]
 
